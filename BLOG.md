@@ -1,90 +1,54 @@
 
 # Reinforcement Learning -- ML For Decision Making
 
-## 1. Baisc
+## A. Introduction to Reinforcement Learning
 
+Reinforcement is the field of machine learning concerning an agent learning how to behave in an environment, through performing actions and learning based upon the outcomes of these actions.  Reinforcement learning is one of the three basic machine learning paradigms, alongside supervised learning and unsupervised learning. 
 
-### a、代码下载
-**问：up主，可以给我发一份代码吗，代码在哪里下载啊？ 
-答：Github上的地址就在视频简介里。复制一下就能进去下载了。**
+Preliminaries:
+1. An agent
+2. Environment
+3. A set of actions applied by agent to the environment
+4. A set of observations and reinforcement returned from the environment
 
-**问：up主，为什么我下载的代码提示压缩包损坏？
-答：重新去Github下载。**
+After applying actions, the agent receives a reward indicating how good the action was through a scalar reward function. The agent aims to maximize the reward, in order to obtain the required goal set by the system to accomplish. 
 
+![This is an image](https://github.com/SiyaoChen103/Reinforcement-Learning/blob/main/RL-image.jpg?raw=true)
 
-### b、 权值下载
-**问：up主，为什么我下载的代码里面，model_data下面没有.pth或者.h5文件？ 
-答：我一般会把权值上传到Github和百度网盘，在GITHUB的README里面就能找到。**
+#### Two Fundemental Challenges
+##### 1. Data is not i.i.d. (independent and identically distributed)
+Unlike supervised learning where the input data comes from a fixed source, the observation/data used in reinforcement learning is created by the agent on its own, and influenced by actions the agent did. Thus, the data is not independent and identically distributed.
 
-### c、 数据集下载
-**问：up主，XXXX数据集在哪里下载啊？
-答：一般数据集的下载地址我会放在README里面，基本上都有，没有的话请及时联系我添加，直接发github的issue即可**。
+##### 2. Ground truth actions are often not available
+Reinforcement learning also differs from supervised learning in that there is no label provided. No instruction is given to the agent on how to perform actions, and the agent has to figure out on its own.
 
-## 2、环境配置问题
-### a、现在库中所用的环境
-**pytorch代码对应的pytorch版本为1.2，博客地址对应**[https://blog.csdn.net/weixin_44791964/article/details/106037141](https://blog.csdn.net/weixin_44791964/article/details/106037141)。
+## B. Types of Reinforcement
+  ### 1. Positive Reinforcement
+Positive Reinforcement is when the resulted event from a particular behavior leads to an **increase** in strength and frequency of the behavior. In other words, the resulting event has a positive effect on the behavior.
 
-**keras代码对应的tensorflow版本为1.13.2，keras版本是2.1.5，博客地址对应**[https://blog.csdn.net/weixin_44791964/article/details/104702142](https://blog.csdn.net/weixin_44791964/article/details/104702142)。
+**Advantages:**
+ - The performance is maximized
+ - The change is sustained for a long period of time.
+ 
+**Disadvantages:**
+ - Too much reinforcement can lead to n overload of states and diminished result
 
-**tf2代码对应的tensorflow版本为2.2.0，无需安装keras，博客地址对应**[https://blog.csdn.net/weixin_44791964/article/details/109161493](https://blog.csdn.net/weixin_44791964/article/details/109161493)。
+  ### 2. Negative Reinforcement
+Negative Reinforcement is defined as the strengthening of behavior, as a result of some negative condition being stopped or avoided. 
+  
+**Advantages:**
+ - The behavior is increased
 
-**问：你的代码某某某版本的tensorflow和pytorch能用嘛？
-答：最好按照我推荐的配置，配置教程也有！其它版本的我没有试过！可能出现问题但是一般问题不大。仅需要改少量代码即可。**
+**Disadvantages:**
+ - Only the minimum behavior of the model can be reached
 
-### b、30系列显卡环境配置
-30系显卡由于框架更新不可使用上述环境配置教程。
-当前我已经测试的可以用的30显卡配置如下：
-**pytorch代码对应的pytorch版本为1.7.0，cuda为11.0，cudnn为8.0.5**。
+## C. How does agent decide which action to take?
+### **1. Policy**
+A policy is a selection model used by an agent to pursue its goals. The policy dictates the actions as a function of the agent’s state and the environment.
 
-**keras代码无法在win10下配置cuda11，在ubuntu下可以百度查询一下，配置tensorflow版本为1.15.4，keras版本是2.1.5或者2.3.1（少量函数接口不同，代码可能还需要少量调整。）**
-
-**tf2代码对应的tensorflow版本为2.4.0，cuda为11.0，cudnn为8.0.5**。
-
-### c、GPU利用问题与环境使用问题
-**问：为什么我安装了tensorflow-gpu但是却没用利用GPU进行训练呢？
-答：确认tensorflow-gpu已经装好，利用pip list查看tensorflow版本，然后查看任务管理器或者利用nvidia命令看看是否使用了gpu进行训练，任务管理器的话要看显存使用情况。**
-
-**问：up主，我好像没有在用gpu进行训练啊，怎么看是不是用了GPU进行训练？
-答：查看是否使用GPU进行训练一般使用NVIDIA在命令行的查看命令，如果要看任务管理器的话，请看性能部分GPU的显存是否利用，或者查看任务管理器的Cuda，而非Copy。**
-![This is an image](/assets/images/RL_image.png)
-
-**问：up主，为什么我按照你的环境配置后还是不能使用？
-答：请把你的GPU、CUDA、CUDNN、TF版本以及PYTORCH版本B站私聊告诉我。**
-
-**问：出现如下错误**
-
-#### 2）、预测时shape不匹配问题
-**问：为什么我运行predict.py会提示我说shape不匹配呀。
-在Pytorch里面是这样的：**
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200722171631901.png)
-在Keras里面是这样的：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200722171523380.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDc5MTk2NA==,size_16,color_FFFFFF,t_70)
-**答：原因主要有仨：
-1、在ssd、FasterRCNN里面，可能是train.py里面的num_classes没改。
-2、model_path没改。
-3、classes_path没改。
-请检查清楚了！确定自己所用的model_path和classes_path是对应的！训练的时候用到的num_classes或者classes_path也需要检查！**
-
-### r、部署问题
-我没有具体部署到手机等设备上过，所以很多部署问题我并不了解……
-
-## 4、语义分割库问题汇总
-### a、shape不匹配问题
-#### 1）、训练时shape不匹配问题
-**问：up主，为什么运行train.py会提示shape不匹配啊？
-答：在keras环境中，因为你训练的种类和原始的种类不同，网络结构会变化，所以最尾部的shape会有少量不匹配。**
-
-#### 2）、预测时shape不匹配问题
-**问：为什么我运行predict.py会提示我说shape不匹配呀。
-在Pytorch里面是这样的：**
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200722171631901.png)
-在Keras里面是这样的：
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20200722171523380.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDc5MTk2NA==,size_16,color_FFFFFF,t_70)
-**答：原因主要有二：
-1、train.py里面的num_classes没改。
-2、预测时num_classes没改。
-请检查清楚！训练和预测的时候用到的num_classes都需要检查！**
-
-### b、显存不足问题
-**问：为什么我运行train.py下面的命令行闪的贼快，还提示OOM啥的？ 
-答：这是在keras中出现的，爆显存了，可以改小batch_size。**
+#### Mathematics 
+We define a policy \pi in terms of the Markov Decision Process, which is a framework borrowed from the problem of optimal control.
+      
+### **2. Value function**
+  - Value function is a reward signal received by the agent to indicate the quality of the action taken.
+      `
