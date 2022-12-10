@@ -1,7 +1,9 @@
 
-## Reinforcement Learning -- ML For Decision Making
+# Reinforcement Learning -- ML For Decision Making
 
-## 1、下载问题
+## 1. Baisc
+
+
 ### a、代码下载
 **问：up主，可以给我发一份代码吗，代码在哪里下载啊？ 
 答：Github上的地址就在视频简介里。复制一下就能进去下载了。**
@@ -44,7 +46,7 @@
 
 **问：up主，我好像没有在用gpu进行训练啊，怎么看是不是用了GPU进行训练？
 答：查看是否使用GPU进行训练一般使用NVIDIA在命令行的查看命令，如果要看任务管理器的话，请看性能部分GPU的显存是否利用，或者查看任务管理器的Cuda，而非Copy。**
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20201013234241524.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80NDc5MTk2NA==,size_16,color_FFFFFF,t_70#pic_center)
+![This is an image](/assets/images/RL_image.png)
 
 **问：up主，为什么我按照你的环境配置后还是不能使用？
 答：请把你的GPU、CUDA、CUDNN、TF版本以及PYTORCH版本B站私聊告诉我。**
