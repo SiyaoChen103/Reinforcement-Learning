@@ -44,10 +44,26 @@ Negative Reinforcement is defined as the strengthening of behavior, as a result 
 
 ## C. How does agent decide which action to take?
 ### **1. Policy**
-A policy is a selection model used by an agent to pursue its goals. The policy dictates the actions as a function of the agent’s state and the environment.
+A policy is a selection model used by an agent to pursue its goals, and dictates the actions as a function of the agent’s state and the environment.
 
-#### Mathematics 
-We define a policy \pi in terms of the Markov Decision Process, which is a framework borrowed from the problem of optimal control.
+#### Terminology
+We define a policy $\pi$ in terms of the Markov Decision Process, which is a framework borrowed from the problem of optimal control.
+A policy is basically a neural network that takes an observation, $o_{t}$, or state, $s_{t}$, as input, and generate action, $a_{t}$, as output. 
+- A policy that takes an observation as input is called an **observational policy**, written as **$\pi(a_{t}|o_{t})$**
+- A policy that takes a state as input is called a **state-based policy**, written as **$\pi(a_{t}|s_{t})$**
+
+*(Note: an observation is a 2-Dimensional complete description of the environment, while a state is a lower-dimensional information that determine particular parts of the environment.)*
+
+#### Steps
+1. Once an observation $o_{t}$ is provided as input to the policy $\pi(a_{t}|o_{t})$, the network generates an output action $a_{t}$.
+2. Immediately after the action is applied, agent receives a new observation, $o_{t+1}$.
+3. $o_{t+1}$ then goes into the same policy $\pi(a_{t+1}|o_{t+1})$, and the network generates a new output $a_{t+1}$, which then creates a new observation $o_{t+2}$...
+...
+
+
+![This is an image](https://github.com/SiyaoChen103/Reinforcement-Learning/blob/main/RL-image.jpg?raw=true)
+
+
       
 ### **2. Value function**
   - Value function is a reward signal received by the agent to indicate the quality of the action taken.
