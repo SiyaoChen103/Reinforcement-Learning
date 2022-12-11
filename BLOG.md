@@ -13,7 +13,7 @@ Preliminaries:
 
 After applying actions, the agent receives a reward indicating how good the action was through a scalar reward function. The agent aims to maximize the reward, in order to obtain the required goal set by the system to accomplish. 
 
-![This is an image](https://github.com/SiyaoChen103/Reinforcement-Learning/blob/main/RL-image.jpg?raw=true)
+![agent_environment_image](https://github.com/SiyaoChen103/Reinforcement-Learning/blob/main/RL-image.jpg?raw=true)
 
 #### Two Fundemental Challenges
 ##### 1. Data is not i.i.d. (independent and identically distributed)
@@ -48,11 +48,14 @@ A policy is a selection model used by an agent to pursue its goals, and dictates
 
 #### Terminology
 We define a policy $\pi$ in terms of the Markov Decision Process, which is a framework borrowed from the problem of optimal control.
-A policy is basically a neural network that takes an observation, $o_{t}$, or state, $s_{t}$, as input, and generate action, $a_{t}$, as output. 
+A policy is basically a neural network that takes an observation $o_{t}$, or state $s_{t}$ as input, and generate action $a_{t}$ as output. 
 - A policy that takes an observation as input is called an **observational policy**, written as **$\pi(a_{t}|o_{t})$**
 - A policy that takes a state as input is called a **state-based policy**, written as **$\pi(a_{t}|s_{t})$**
 
 *(Note: an observation is a 2-Dimensional complete description of the environment, while a state is a lower-dimensional information that determine particular parts of the environment.)*
+
+The architecture of the policy is dependent on the input. For example, if the input is an image, then we could use CNN; if the input is a state, then we could use deep neural network; if the input is graph like data,then we could use graph network.
+
 
 #### Steps
 1. Once an observation $o_{t}$ is provided as input to the policy $\pi(a_{t}|o_{t})$, the network generates an output action $a_{t}$.
@@ -61,10 +64,30 @@ A policy is basically a neural network that takes an observation, $o_{t}$, or st
 ...
 
 
-![This is an image](https://github.com/SiyaoChen103/Reinforcement-Learning/blob/main/RL-image.jpg?raw=true)
+![Policy_image](https://github.com/SiyaoChen103/Reinforcement-Learning/blob/main/RL-image2.jpg?raw=true)
 
+In summary, an agent' behavior in an environment is specified by a policy that maps the current state to a set of probabilities for taking each action. 
 
       
 ### **2. Value function**
-  - Value function is a reward signal received by the agent to indicate the quality of the action taken.
-      `
+Value function is a reward signal observed by the agent upon taking action, indicating the quality of the action. A policy is called optimal if it achieves the best-expected return from any initial state.
+
+### **State-value Function** 
+A **state-value function** is the expected return from a given state. Taking state as an input, the function predicts the expected reward for each possible action the agent could take. If the action is good, the state-value function will be high.
+
+We define the value of a policy $\pi$ by **$V_{\pi}(s)=E_{\pi}[R_{t}|S_{t} = s]$**, where R is the return associated with following $\pi$ from the initial state s.  
+
+
+### **Action-value Function**
+Another helpful function is **action-value function**: **$Q_{\pi}(s,a)=E_{\pi}[R_{t}|S_{t} = s, A_{t} = a]$**.
+The action-value function describes the expected return if the agent selects an action with the respect to policy and current state.
+
+
+### **Optimal Policy**
+To recall, the goal in reinforcement learning is to find the policy that obtains the most reward possible over the long run, which is the optimal policy. An optimal policy is defined as the policy with the highest possible value function in all states.
+
+We can find the optimal policy using optimal value function, such as the Bellman equation, which defines a relationship between the value of a state, or state-action pair, and its possible successors. Upon solving the optimal value function, we can evaluate our policies to find theoptimal policy.
+
+
+In summary, value functions estimate future return under a certain policy, and an optimal policy is the policy that achieves the highest value possible in each state. 
+
